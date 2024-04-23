@@ -67,6 +67,11 @@ on fs
 on boot
     start health-hal-2-1
 
+on property:sys.boot_completed=1
+    mkdir /tmp/flashlight
+    write /tmp/flashlight/max_brightness "1"
+    symlink /sys/devices/virtual/camera/flash/rear_flash /tmp/flashlight/brightness
+
 service linkblobs /system/bin/linkblobs.sh
     user root
     group root
